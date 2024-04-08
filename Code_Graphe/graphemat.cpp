@@ -5,7 +5,7 @@
 
 booleen  grapheDetruit = vrai;
 
-// remise à zéro du tableau de marquage
+// remise ï¿½ zï¿½ro du tableau de marquage
 static void initMarque (GrapheMat* graphe)
 {
 
@@ -18,12 +18,12 @@ GrapheMat* creerGrapheMat (int nMax, int value)
     GrapheMat* graphe  = (GrapheMat*) malloc (sizeof (GrapheMat));
     graphe->n       = 0;
     graphe->nMax    = nMax;
-    graphe->value   = value; // value : vrai si le graphe est valué
+    graphe->value   = value; // value : vrai si le graphe est valuï¿½
     graphe->nomS    = (NomSom*)  malloc (sizeof(NomSom)  *nMax);
     graphe->marque  = (booleen*) malloc (sizeof(booleen) *nMax);
     graphe->element = (int*)     malloc (sizeof(int)*nMax*nMax);
     graphe->valeur  = (int*)     malloc (sizeof(int)*nMax*nMax);
-    // initialisation par défaut
+    // initialisation par dï¿½faut
     for (int i=0; i<nMax; i++)
     {
         for (int j=0; j<nMax; j++)
@@ -38,7 +38,7 @@ GrapheMat* creerGrapheMat (int nMax, int value)
 }
 
 
-// désallocation d'un graphe
+// dï¿½sallocation d'un graphe
 void detruireGraphe (GrapheMat* graphe)
 {
     free (graphe->nomS);
@@ -76,7 +76,7 @@ void ajouterUnSommet (GrapheMat* graphe, NomSom nom)
     }
     else
     {
-        printf ("\n%s déjà défini\n", nom);
+        printf ("\n%s dï¿½jï¿½ dï¿½fini\n", nom);
     }
 }
 
@@ -125,7 +125,7 @@ static void ecrireEtape (Matrice a, Matrice p, int k, int ns, int nMax)
     printf ("\n A implementer");
 }
 
-// initialiser les matrices a et p à partir de graphe
+// initialiser les matrices a et p ï¿½ partir de graphe
 static void initFloyd (GrapheMat* graphe, Matrice* a, Matrice* p)
 {
     printf ("\n A implementer");

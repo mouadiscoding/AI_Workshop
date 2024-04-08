@@ -1,5 +1,4 @@
 #include "../Code_Arbre/arbre.h"
-#include "../Code_Graphe/graphemat.h"
 #include "../Code_Liste/liste.h"
 #include <iostream>
 #include <cstring>
@@ -9,7 +8,7 @@ using namespace std;
 namespace explorationArbre {
 
     // Exploration en largeur d'un arbre binaire.
-    void enLargeur(Noeud* racine, char* (*afficher) (Objet*),int (*comparer) (Objet*, Objet*). Objet* but){
+    void enLargeur(Noeud* racine, char* (*afficher) (Objet*),int (*comparer) (Objet*, Objet*), Objet* but){
         Liste* li = creerListe(0, afficher, NULL);
         insererEnFinDeListe(li, racine);
         while(true){
@@ -18,7 +17,7 @@ namespace explorationArbre {
                 return;
             }
             
-            Noeud* extrait = extraireEnTeteDeListe(li);
+            Noeud* extrait = (Noeud*) extraireEnTeteDeListe(li);
             cout << afficher(extrait->reference) << " ";
             if(comparer(extrait->reference, but) == 0){
                     return;
@@ -59,16 +58,15 @@ namespace explorationArbre {
     }*/
 
     // Exploration en profondeur préfixé d'un arbre binaire.
-    void prefixe(Noeud* racine, char* (*afficher), int (*comparer) (Objet*, Objet*), Objet* but){
+    void prefixe(Noeud* racine, char* (*afficher) (Objet*), int (*comparer) (Objet*, Objet*), Objet* but){
 
         if(racine != NULL){
             cout << afficher(racine->reference);
             if(comparer(racine->reference, but) == 0){
-                trouve = true;
                 return;
             }
-            prefixe(racine->gauche, afficher, comparer);
-            prefixe(racine->droite, afficher, comparer);
+            prefixe(racine->gauche, afficher, comparer, but);
+            prefixe(racine->droite, afficher, comparer, but);
         }
         cout << "echec";
         return;
@@ -77,12 +75,12 @@ namespace explorationArbre {
     // Exploration en profondeur infixé d'un arbre binaire
     void infixe(Noeud* racine, char* (*afficher) (Objet*), int (*comparer) (Objet*, Objet*), Objet* but){
         if(racine != NULL){
-            infixe(racine->gauche, afficher, comparer);
+            infixe(racine->gauche, afficher, comparer, but);
             cout << afficher(racine->reference) << " ";
             if(comparer(racine->reference, but) == 0){
                 return;
             }
-            infixe(racine->droite, afficher, comparer);
+            infixe(racine->droite, afficher, comparer, but);
         }
         cout << "echec";
         return;
@@ -92,8 +90,8 @@ namespace explorationArbre {
     // Exploration en profondeur postfixé d'un arbre binaire
     void postfixe(Noeud* racine, char* (*afficher) (Objet*), int (*comparer) (Objet*, Objet*), Objet* but){
         if(racine != NULL){
-            postfixe(racine->gauche, afficher, comparer);
-            postfixe(racine->droite, afficher, comparer);
+            postfixe(racine->gauche, afficher, comparer, but);
+            postfixe(racine->droite, afficher, comparer, but);
             cout << afficher(racine->reference) << " ";
             if(comparer(racine->reference, but) == 0){
                 return;
@@ -114,7 +112,7 @@ namespace explorationArbre {
             EPL_prefixe(racine->gauche, afficher, comparer, but, limite-1);
             EPL_prefixe(racine->droite, afficher, comparer, but, limite-1);
         }
-        cout << "echec"
+        cout << "echec";
         return false;
     }
 
@@ -161,7 +159,7 @@ namespace explorationArbre {
         int limite = 0;
         bool trouve = false;
         while(!trouve){
-            trouve = EPL_Infixe(racine, afficher, comparer, but, limite);
+            trouve = EPL_infixe(racine, afficher, comparer, but, limite);
             limite++;
         }
     }

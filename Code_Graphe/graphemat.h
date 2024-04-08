@@ -12,15 +12,17 @@ typedef int* Matrice;
 typedef struct {
   int      n;       // nombre de sommets
   int      nMax;    // nombre max de sommets
-  booleen  value;   // graphe valué ou non
+  booleen  value;   // graphe valuï¿½ ou non
   NomSom*  nomS;    // noms des sommets
   Matrice  element; // existence d'un arc (i, j)
   Matrice  valeur;  // cout de l'arc (i, j)
-  booleen* marque;  // sommet marqué (visité) ou non
+  booleen* marque;  // sommet marquï¿½ (visitï¿½) ou non
 } GrapheMat;
 
+static void initMarque(GrapheMat* graphe);
 GrapheMat* creerGrapheMat     (int nMax, int value);
 void       detruireGraphe     (GrapheMat* graphe);
+static int rang (GrapheMat* graphe, NomSom nom);
 void       ajouterUnSommet    (GrapheMat* graphe, NomSom nom);
 void       ajouterUnArc       (GrapheMat* graphe, NomSom somD, NomSom somA, int cout);
 void       ecrireGraphe       (GrapheMat* graphe);
